@@ -2,7 +2,7 @@ FROM nginx:latest
 
 COPY ./nginx/conf/ /etc/nginx/conf.d/
 COPY ./certbot/conf/ /etc/letsencrypt/
-COPY ./website/ /usr/share/nginx/html
+COPY ./nginx/website/ /usr/share/nginx/html
 
 EXPOSE 80
 EXPOSE 443
