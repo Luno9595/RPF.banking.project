@@ -27,11 +27,11 @@ jobs:
         docker buildx build --push \
           --tag ilunoi/rpf.banking.certbot:latest \
           --tag ilunoi/rpf.banking.certbot:${{ github.sha }} \
-          -f ./rpfbank.pp.ua/certbot/ ./rpfbank.pp.ua
+          -f ./rpfbank.pp.ua/certbot/Dockerfile ./rpfbank.pp.ua
     
     - name: Build and push nginx Docker image
       run: |
         docker buildx build --push \
           --tag ilunoi/rpf.banking.nginx:latest \
           --tag ilunoi/rpf.banking.nginx:${{ github.sha }} \
-          -f ./rpfbank.pp.ua/ ./rpfbank.pp.ua
+          -f ./rpfbank.pp.ua/Dockerfile ./rpfbank.pp.ua
