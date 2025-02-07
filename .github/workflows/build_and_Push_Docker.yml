@@ -54,3 +54,4 @@ jobs:
           docker rm rpfbanking-nginx || true
           docker run -d --name rpfbanking-certbot ilunoi/rpf.banking.certbot:latest
           docker run -d --name rpfbanking-nginx ilunoi/rpf.banking.nginx:latest
+          
