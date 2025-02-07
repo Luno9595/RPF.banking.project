@@ -1,5 +1,9 @@
 FROM certbot/certbot:latest
 
-COPY ./certbot/conf/ /etc/letsencrypt/
+RUN mkdir -p /var/www/certbot
 
-CMD sh -c "mkdir -p /var/www/certbot && certbot certonly --webroot -w /var/www/certbot -d rpfbank.pp.ua --email dnikonenok@gmail.com --agree-tos --non-interactive"
+COPY ./conf/ /etc/letsencrypt/
+COPY ./www/ /var/www/certbot/
+
+CMD certbot certonly --webroot -w /var/www/certbot -d rpfbank.pp.ua --email dnikonenok@gmail.com --agree-tos --non-interactive
+ENTRYPOINT ["/bin/sh", "-c", "trap exit TERM; while :; do certbot renew; sleep 12h & wait $!; done;"]
