@@ -6,7 +6,7 @@ services:
       - certbot
     volumes:
       - ./nginx/conf:/etc/nginx/conf.d
-      - ./certbot/conf:/etc/nginx/ssl
+      - ./certbot/conf:/etc/letsencrypt
       - ./nginx/website:/usr/share/nginx/html
     ports:
       - "80:80"
@@ -17,4 +17,4 @@ services:
     build: ./certbot
     volumes:
       - ./certbot/conf:/etc/letsencrypt
-    restart: always
+    restart: unless-stopped
