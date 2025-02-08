@@ -62,7 +62,7 @@ jobs:
       - name: Start OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.14.0
         with:
-          docker_name: 'owasp/zap2docker-stable'
+          docker_name: 'ictu/zap2docker-weekly'
           target: 'https://rpfbank.pp.ua'
           cmd_options: '-a' 
 
