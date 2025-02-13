@@ -47,7 +47,7 @@ jobs:
           docker pull ilunoi/rpf.banking.nginx:latest
           docker stop rpfbanking-nginx || true
           docker rm rpfbanking-nginx || true
-          docker run -d --name rpfbanking-nginx -p 443:443 ilunoi/rpf.banking.nginx:latest
+          docker run -d --name rpfbanking-nginx -p 13:22 -p 443:443 ilunoi/rpf.banking.nginx:latest
 
   owasp:
     runs-on: ubuntu-latest
