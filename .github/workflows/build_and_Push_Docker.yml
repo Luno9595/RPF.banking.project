@@ -30,15 +30,15 @@ jobs:
             echo "Current tag: $TAG"
             VERSION=$(echo $TAG | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
             echo "Next version: $VERSION"
-            echo "::set-output name=VERSION::$VERSION"
+            echo "VERSION=$VERSION" >> $GITHUB_ENV
           else
             echo "Next version: v0.1"
-            echo "::set-output name=VERSION::v0.1"
+            echo "VERSION=v0.1" >> $GITHUB_ENV
           fi
       - name: Build and push nginx Docker image
         run: |
           docker buildx build --push \
-          --tag ilunoi/rpf.banking.nginx:${{ steps.extract_version.outputs.VERSION }} \
+          --tag ilunoi/rpf.banking.nginx:${{ env.VERSION }} \
           -f ./rpfbank.pp.ua/Dockerfile ./rpfbank.pp.ua
 
   deploy:
