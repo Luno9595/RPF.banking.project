@@ -52,10 +52,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            docker pull ilunoi/rpf.banking.nginx:${{ steps.extract_version.outputs.VERSION }}
+            docker pull ilunoi/rpf.banking.nginx:${{ env.VERSION }}
             docker stop rpfbanking-nginx || true
             docker rm rpfbanking-nginx || true
-            docker run -d --name rpfbanking-nginx -p 13:22 -p 443:443 ilunoi/rpf.banking.nginx:${{ steps.extract_version.outputs.VERSION }}
+            docker run -d --name rpfbanking-nginx -p 13:22 -p 443:443 ilunoi/rpf.banking.nginx:${{ env.VERSION }}
 
   owasp:
     runs-on: ubuntu-latest
