@@ -27,7 +27,8 @@ jobs:
     - name: Build and push nginx Docker image
       run: |
         docker buildx build --push \
-          --tag ilunoi/rpf.banking.nginx:latest \
+        --tag ilunoi/rpf.banking.nginx:latest \
+        -f ./rpfbank.pp.ua/Dockerfile ./rpfbank.pp.ua
 
 
   deploy:
