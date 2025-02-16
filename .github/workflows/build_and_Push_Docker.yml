@@ -25,21 +25,21 @@ jobs:
       - name: Extract version from tags
         id: extract_version
         run: |
-          if git describe --tags --abbrev=0; then
-            TAG=$(git describe --tags --abbrev=0)
-            echo "Current tag: $TAG"
+          TAG=$(git tag --sort=-v:refname | head -n 1)
+          if [ -z "$TAG" ]; then
+            echo "Next version: v0.1"
+            echo "VERSION=v0.1" >> $GITHUB_ENV
+          else
             VERSION=$(echo $TAG | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
             echo "Next version: $VERSION"
             echo "VERSION=$VERSION" >> $GITHUB_ENV
-          else
-            echo "Next version: v0.1"
-            echo "VERSION=v0.1" >> $GITHUB_ENV
           fi
       - name: Build and push nginx Docker image
         run: |
           docker buildx build --push \
           --tag ilunoi/rpf.banking.nginx:${{ env.VERSION }} \
           -f ./rpfbank.pp.ua/Dockerfile ./rpfbank.pp.ua
+
 
   deploy:
     runs-on: ubuntu-latest
