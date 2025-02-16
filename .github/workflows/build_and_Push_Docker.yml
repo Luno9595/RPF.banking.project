@@ -22,23 +22,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Extract version from tags
-        id: extract_version
-        run: |
-          TAG=$(git tag --sort=-v:refname | head -n 1)
-          if [ -z "$TAG" ]; then
-            echo "Next version: v0.1"
-            echo "VERSION=v0.1" >> $GITHUB_ENV
-          else
-            VERSION=$(echo $TAG | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
-            echo "Next version: $VERSION"
-            echo "VERSION=$VERSION" >> $GITHUB_ENV
-          fi
       - name: Build and push nginx Docker image
         run: |
-          docker buildx build --push \
-          --tag ilunoi/rpf.banking.nginx:${{ env.VERSION }} \
-          -f ./rpfbank.pp.ua/Dockerfile ./rpfbank.pp.ua
+         docker buildx build --push \ 
+         --tag ilunoi/rpf.banking.nginx:latest \ 
+         -f ./rpfbank.pp.ua/Dockerfile ./rpfbank.pp.ua
 
 
   deploy:
@@ -52,10 +40,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            docker pull ilunoi/rpf.banking.nginx:${{ env.VERSION }}
-            docker stop rpfbanking-nginx || true
-            docker rm rpfbanking-nginx || true
-            docker run -d --name rpfbanking-nginx -p 13:22 -p 443:443 ilunoi/rpf.banking.nginx:${{ env.VERSION }}
+           docker pull ilunoi/rpf.banking.nginx:latest 
+           docker stop rpfbanking-nginx || true 
+           docker rm rpfbanking-nginx || true 
+           docker run -d --name rpfbanking-nginx -p 13:22 -p 443:443 ilunoi/rpf.banking.nginx:latest
 
   owasp:
     runs-on: ubuntu-latest
