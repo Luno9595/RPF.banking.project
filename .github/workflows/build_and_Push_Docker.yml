@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check files in the workspace
-      run: ls -R ./
+      run: ls -R RPF.banking.project/
     
     - name: Checkout repository
       uses: actions/checkout@v4
