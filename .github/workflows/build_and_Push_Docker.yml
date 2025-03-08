@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: read
+  contents: write
   issues: write
 
 jobs:
@@ -62,4 +62,4 @@ jobs:
         uses: actions/upload-artifact@v4.6.0
         with:
           name: ZAP-Report
-          path: RPF.banking.project/report_OWASP/zap-report.html
+          path: report_OWASP/zap-report.html
