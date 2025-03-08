@@ -57,11 +57,10 @@ jobs:
         with:
           docker_name: 'ictu/zap2docker-weekly'
           target: 'https://rpfbank.pp.ua'
-          cmd_options: '-a'
-          html_report_file: 'report_OWASP/zap-report.html'
+          cmd_options: '-a -r report_OWASP/zap-report.html'
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         with:
           name: ZAP-Report
           overwrite: true
-          path: './report_OWASP/zap-report.html'
+          path: ./report_OWASP/zap-report.html
