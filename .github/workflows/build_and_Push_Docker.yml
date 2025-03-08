@@ -13,6 +13,9 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
+    - name: Check files in the workspace
+      run: ls -R ./
+    
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Set up Docker Buildx
@@ -58,8 +61,6 @@ jobs:
           target: 'https://rpfbank.pp.ua'
           cmd_options: '-a'
           rules_file_name: 'report_OWASP/zap-report.html'
-      - name: Check files in the workspace
-        run: ls -R ./report_OWASP/
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4.6.0
         with:
