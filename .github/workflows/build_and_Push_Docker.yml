@@ -57,9 +57,9 @@ jobs:
           docker_name: 'ictu/zap2docker-weekly'
           target: 'https://rpfbank.pp.ua'
           cmd_options: '-a'
-          output_file: 'report_OWASP/zap-report.html'
+          rules_file_name: 'report_OWASP/zap-report.html'
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4.6.0
         with:
           name: ZAP-Report
-          path: report_OWASP/
+          path: report_OWASP/zap-report.html
