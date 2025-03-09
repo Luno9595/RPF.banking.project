@@ -60,6 +60,6 @@ jobs:
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         with:
-          name: ZAP-Report
+          name: zap-report
           overwrite: true
-          path: ./report_OWASP/zap-report.html
+          path: zap-report.html
