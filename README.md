@@ -20,7 +20,7 @@ The primary objective of this diploma project is to design and implement a bank 
 ## Team Members
 - **System Administrator**: Nikononok Dmytro
     - Responsible for server setup, security, and maintenance.
-    - Tools used: Docker, Nginx, Certbot, AWS.
+    - Tools used: Docker, Nginx, AWS.
 
 ## Installation and Setup
 1. **Clone the repository from Docker Hub**:
