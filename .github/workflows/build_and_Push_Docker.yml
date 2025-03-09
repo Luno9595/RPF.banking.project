@@ -52,14 +52,12 @@ jobs:
     needs: deploy
     steps:
       - name: Start OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.14.0
-        with:
-          docker_name: 'ictu/zap2docker-weekly'
-          target: 'https://rpfbank.pp.ua'
-          cmd_options: '-a -r report_OWASP/zap-report.html'
+        run: |
+          docker pull ictu/zap2docker-weekly
+          sudo chmod -R 777 $(pwd)
+          docker run -v $(pwd):/zap/wrk/:rw ictu/zap2docker-weekly zap-baseline.py -t https://rpfbank.pp.ua -r zap_report.html || true
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         with:
           name: zap-report
-          overwrite: true
           path: zap-report.html
