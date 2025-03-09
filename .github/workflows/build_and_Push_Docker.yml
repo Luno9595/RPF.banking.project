@@ -63,4 +63,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: zap_report.txt
-          path: report_OWASP/zap_report.txt
+          path: report_OWASP/
