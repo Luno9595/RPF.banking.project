@@ -64,4 +64,4 @@ jobs:
         with:
           include-hidden-files: true
           name: zap_report.txt
-          path: .report_OWASP
+          path: report_OWASP
