@@ -54,10 +54,20 @@ jobs:
       - name: Start OWASP ZAP Baseline Scan
         run: |
           docker pull ictu/zap2docker-weekly
-          sudo chmod -R 777 $(pwd)
-          docker run -v $(pwd):/zap/wrk/:rw ictu/zap2docker-weekly zap-baseline.py -t https://rpfbank.pp.ua -r zap_report.html || true
-      - name: Upload ZAP Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: zap-report
-          path: zap-report.html
+          docker run --rm -v $(pwd):/zap/wrk/:rw -t ictu/zap2docker-weekly zap-baseline.py -I -j \
+            -t https://rpfbank.pp.ua \
+            -r zap-report.html 
+            
+      - name: Copy OWASP ZAP report to repository folder
+        run: |
+          mkdir -p report_OWASP
+          cp zap-report.html report_OWASP/
+
+      - name: Commit and push OWASP ZAP report to repository
+        run: |
+          git config --global user.name "GitHub Actions"
+          git add report_OWASP/zap-report.html
+          git commit -m "Add OWASP ZAP report"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
