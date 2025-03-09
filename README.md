@@ -26,13 +26,11 @@ The primary objective of this diploma project is to design and implement a bank 
 1. **Clone the repository from Docker Hub**:
     ```Nginx
     docker pull ilunoi/rpf.banking.nginx:latest
-    docker pull ilunoi/rpf.banking.certbot:latest
     ```
 
 2. **Run the Dockerfiles**:
     ```Nginx
     docker run -d --name rpfbanking-nginx -p 80:80 -p 443:443 ilunoi/rpf.banking.nginx:latest
-    docker run -d --name rpfbanking-certbot ilunoi/rpf.banking.certbot:latest
     ```
 
 ## Contact Information
