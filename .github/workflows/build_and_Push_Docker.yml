@@ -55,7 +55,7 @@ jobs:
         run: |
           chmod -R 777 $(pwd)
           docker pull ictu/zap2docker-weekly
-          docker run --rm -v $(pwd):/zap/wrk/:rw --user $(id -u):$(id -g) -t ictu/zap2docker-weekly bash -c "zap-baseline.py -I -j -t https://rpfbank.pp.ua -r /zap/wrk/zap-report.html"
+          docker run --rm -v $(pwd):/zap/wrk/:rw -t ictu/zap2docker-weekly zap-baseline.py -I -j -t https://rpfbank.pp.ua -r /zap/wrk/zap-report.html
       - name: Copy OWASP ZAP report to repository folder
         run: |
           mkdir -p report_OWASP
